@@ -67,9 +67,9 @@ npm run dev
 ```
 
 # Informasi Tambahan :
-- Backend Menggunakan Laravel 10 berbasis SOA, sehingga controller terletak pada app/Services
+- Backend Menggunakan Laravel 11 berbasis SOA, sehingga controller terletak pada app/Services
 - Frontend Menggunakan Vue.js dengan axios
-
+- - - - - - - - - - - - - - - -
 - Backend berjalan ada port 8000 menggunakan api, dan untuk menghubungkan ke Frondend menggunakan CORS
 - Frontend berjalan pada port 5173
 

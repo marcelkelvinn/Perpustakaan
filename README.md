@@ -11,7 +11,7 @@ Full-stack application
 1. Masuk kedalam directory backend
 
 ```bash
-cd backend
+cd perpustakaan-backend
 ```
 
 2. Install dependencies untuk backend
@@ -47,13 +47,17 @@ php artisan serve
 1. Masuk kedalam directory backend
 
 ```bash
-cd frontend
+cd perpustakaan-frontend
 ```
 
 2. Install dependencies untuk frontend
 
 ```bash
 npm install
+```
+
+```bash
+npm install axios
 ```
 
 3. Jalankan perintah untuk development server

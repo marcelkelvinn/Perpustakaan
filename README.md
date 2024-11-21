@@ -12,11 +12,13 @@ Full-stack application
 
 ```bash
 cd backend
+```
 
 2. Install dependencies untuk backend
 
 ```bash
 composer install
+```
 
 3. Konfigurasi file .env
 
@@ -27,32 +29,38 @@ DB_PORT=3306
 DB_DATABASE=perpustakaan
 DB_USERNAME=root
 DB_PASSWORD=
+```
 
 4. Jalankan migrasi database dan juga seeder untuk memasukkan data awal/dummy
 
 ```bash
 php artisan migrate --seed
+```
 
 5. Jalankan perintah untuk development server
 
 ```bash
 php artisan serve
+```
 
 ## Frontend
 1. Masuk kedalam directory backend
 
 ```bash
 cd frontend
+```
 
 2. Install dependencies untuk frontend
 
 ```bash
 npm install
+```
 
 3. Jalankan perintah untuk development server
 
 ```bash
 npm run dev
+```
 
 # Informasi Tambahan :
 Backend Menggunakan Laravel 10 berbasis SOA, sehingga controller terletak pada app/Services
@@ -69,11 +77,13 @@ backend
 
 ```bash
 php artisan serve
+```
 
 frontend
 
 ```bash
 npm run dev
+```
 
 ### Backend :
 http://localhost:8000/api/buku

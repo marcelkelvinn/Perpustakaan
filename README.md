@@ -86,7 +86,7 @@ npm run dev
 ```
 
 - Backend :
-[title](http://localhost:8000/api/buku)
+  http://localhost:8000/api/buku
 
 - Frontend :
-[title]((http://localhost:5173/bukus)
+  http://localhost:5173/bukus

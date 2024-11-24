@@ -28,6 +28,7 @@ Route::prefix('denda')->group(function () {
     Route::get('{id}', [DendaService::class, 'getById']);
     Route::put('{id}', [DendaService::class, 'update']);
     Route::delete('{id}', [DendaService::class, 'delete']);
+    Route::get('/peminjam', [PeminjamanService::class, 'getAll']);
 });
 
 Route::prefix('peminjaman')->group(function () {
@@ -37,6 +38,9 @@ Route::prefix('peminjaman')->group(function () {
     Route::get('{id}', [PeminjamanService::class, 'getById']);
     Route::put('{id}', [PeminjamanService::class, 'update']);
     Route::delete('{id}', [PeminjamanService::class, 'delete']);
+    // Route::get('/users', [UserService::class, 'getAll']);
+    Route::get('/bukus', [BukuService::class, 'getAll']);
+
 });
 
 Route::prefix('sirkulasi')->group(function () {

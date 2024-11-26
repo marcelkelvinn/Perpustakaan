@@ -24,7 +24,7 @@
             <th>Penerbit</th>
             <th>Kategori</th>
             <th>Tahun Terbit</th>
-            <th>Aksi</th>
+            <th>Kelola</th>
           </tr>
         </thead>
         <tbody>
@@ -36,7 +36,7 @@
             <td>{{ buku.kategori?.nama || 'Tidak ada' }}</td>
             <td>{{ buku.tahun_terbit }}</td>
             <td>
-              <button class="btn btn-warning btn-sm btn-green" @click="openForm(buku)">
+              <button class="btn btn-warning btn-sm btn-green" @click="openForm(buku)" style="margin-right:2px;">
                 <img src="../assets/icon edit.png" style="height: 20px;">
               </button>
               <button class="btn btn-danger btn-sm btn-red" @click="deleteBuku(buku.id)">
@@ -159,15 +159,15 @@ export default {
 }
 
 .btn-red {
-  background-color: #ff1d1d;
+  background-color: #cb442c;
 }
 
 .btn-green {
-  background-color: #7cd653;
+  background-color: #42ac50;
 }
 
 .btn-red:hover {
-  background-color: #a81616;
+  background-color: #a53926;
 }
 
 .btn-blue:hover {
@@ -175,7 +175,7 @@ export default {
 }
 
 .btn-green:hover {
-  background-color: #29c015;
+  background-color: #399045;
 }
 
 /* Search field styling */

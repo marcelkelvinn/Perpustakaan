@@ -25,7 +25,7 @@
         </div>
         <div class="form-group mt-4">
           <button type="submit" class="btn btn-primary btn-submit">Simpan</button>
-          <button type="button" class="btn btn-secondary btn-cancel" @click="$emit('close')">Batal</button>
+          <button type="button" class="btn btn-secondary btn-cancel" style="float: right;" @click="$emit('close')">Batal</button>
         </div>
       </form>
     </div>

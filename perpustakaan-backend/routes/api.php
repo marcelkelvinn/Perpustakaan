@@ -8,10 +8,6 @@ use App\Services\Denda\DendaService;
 use App\Services\Peminjaman\PeminjamanService;
 use App\Services\Sirkulasi\SirkulasiService;
 
-Route::get('/', function() {
-    return 'welcome';
-});
-
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');

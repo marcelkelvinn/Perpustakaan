@@ -18,7 +18,7 @@
       <table v-if="!loading" class="table table-bordered">
         <thead>
           <tr>
-            <th>#</th>
+            <th>No</th>
             <th>Judul</th>
             <th>Pengarang</th>
             <th>Penerbit</th>

@@ -1,5 +1,6 @@
 <template>
     <div class="container mt-4">
+        <h2 style="text-align: center; margin-bottom: 40px;">Display Buku</h2>
         <div class="search-bar mb-4">
             <input type="text" v-model="searchQuery" class="form-control" placeholder="Cari Judul / Kategori Buku"
                 @input="filterBuku" />
@@ -22,6 +23,9 @@
                     </div>
                     <div class="book-details">
                         <h3 class="book-title">{{ buku.judul }}</h3>
+                        <p class="book-author">Pengarang: {{ buku.pengarang }}</p>
+                        <p class="book-publisher">Penerbit: {{ buku.penerbit }}</p>
+                        <p class="book-year">Tahun Terbit: {{ buku.tahunTerbit }}</p>
                         <p class="book-description">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore et dolore magna aliqua.

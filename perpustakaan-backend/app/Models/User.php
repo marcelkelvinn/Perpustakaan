@@ -6,11 +6,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -48,6 +49,14 @@ class User extends Authenticatable
         ];
     }
 
+    /**
+     * Relasi dengan tabel denda.
+     */
+    public function Denda()
+    {
+        return $this->hasMany(Denda::class, 'id_user', 'id');
+    }
+    
      /**
      * Relasi dengan tabel peminjaman.
      */
@@ -71,4 +80,5 @@ class User extends Authenticatable
     {
         return $this->hasMany(Sirkulasi::class, 'id_user', 'id');
     }
+
 }

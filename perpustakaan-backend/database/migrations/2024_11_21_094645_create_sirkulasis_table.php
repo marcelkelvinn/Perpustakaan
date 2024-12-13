@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('sirkulasis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_buku')->constrained('bukus');
-            $table->foreignId('id_user')->constrained('users');
+            $table->foreignId('id_buku')->constrained('bukus')->cascadeOnDelete();
+            $table->foreignId('id_user')->constrained('users')->cascadeOnDelete();
             $table->date('tgl_pinjam');
             $table->date('tgl_kembali')->nullable();
             $table->date('tgl_pengembalian')->nullable();

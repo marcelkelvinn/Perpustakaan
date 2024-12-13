@@ -1,40 +1,46 @@
 <template>
     <div class="register-container">
-      <h2>Daftar</h2>
-      <form @submit.prevent="handleRegister">
-        <div>
-          <label for="NIM">NIM</label>
-          <input type="text" id="NIM" v-model="NIM" required />
+        <div class="register-box">
+            <form @submit.prevent="handleRegister">
+                <div class="form-group">
+                    <label for="NIM">NIM</label>
+                    <input type="text" id="NIM" v-model="NIM" placeholder="Enter your NIM" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" v-model="name" placeholder="Enter your name" required />
+                    <span v-if="nameTaken" class="error-text">Nama sudah terdaftar.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" v-model="email" placeholder="Enter your email" required />
+                    <span v-if="emailTaken" class="error-text">Email sudah terdaftar.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" v-model="password" placeholder="Enter your password" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="password_confirmation">Confirm Password</label>
+                    <input type="password" id="password_confirmation" v-model="password_confirmation" placeholder="Confirm your password" required />
+                </div>
+
+                <button type="submit" class="submit-button">Register</button>
+            </form>
+
+            <p class="signup-link">
+                Already have an account? <router-link to="/login">Login Here</router-link>
+            </p>
         </div>
-        <div>
-          <label for="name">Nama</label>
-          <input type="text" id="name" v-model="name" required :class="{'error-input': nameTaken}" />
-          <span v-if="nameTaken" class="error-text">Nama sudah terdaftar.</span>
-        </div>
-        <div>
-          <label for="email">Email</label>
-          <input type="email" id="email" v-model="email" required :class="{'error-input': emailTaken}" />
-          <span v-if="emailTaken" class="error-text">Email sudah terdaftar.</span>
-        </div>
-        <div>
-          <label for="password">Password</label>
-          <input type="password" id="password" v-model="password" required />
-        </div>
-        <div>
-          <label for="password_confirmation">Konfirmasi Password</label>
-          <input type="password" id="password_confirmation" v-model="password_confirmation" required />
-        </div>
-        <div>
-          <button type="submit" :disabled="isLoading">Daftar</button>
-          <button type="button" @click="cancelRegistration">Batal</button> <!-- Tombol Batal -->
-        </div>
-        <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
-      </form>
     </div>
-  </template>
-  
-  <script>
-  import axios from 'axios';
+</template>
+
+<script>
+import axios from 'axios';
   
   export default {
     data() {
@@ -91,32 +97,65 @@
         } finally {
           this.isLoading = false;
         }
-      },
-      cancelRegistration() {
-        // Mengarahkan pengguna kembali ke halaman login
-        this.$router.push('/login');
       }
     }
   };
-  </script>
-  
-  <style scoped>
-  .error-input {
-    border-color: red;
-  }
-  .error-text {
-    color: red;
-    font-size: 12px;
-  }
-  button {
-    margin: 10px;
+</script>
+
+<style scoped>
+.register-box {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.submit-button {
+    background-color: #007bff;
+    color: #ffffff;
     padding: 10px 20px;
-    font-size: 16px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-  }
-  button:hover {
-    background-color: #3498db;
-    color: white;
-  }
-  </style>
-  
+    font-size: 16px;
+    width: 100%;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.signup-link {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.signup-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+</style>

@@ -3,6 +3,7 @@ import HelloWorld from '../views/HelloWorld.vue';
 import Home from '../views/Home.vue';
 import Login from '../views/Auth/Login.vue';
 import Register from '../views/Auth/Register.vue';
+import Profile from '../views/Profile/Profile.vue';
 import Buku from '../views/Buku/Buku.vue';
 import Peminjaman from '../views/Peminjaman/Peminjaman.vue';
 import Denda from '../views/Denda/Denda.vue';
@@ -13,6 +14,7 @@ const routes = [
   { path: "/hw", name: "HelloWorld", component: HelloWorld },
   { path: "/login", name: "Login", component: Login },
   { path: "/register", name: "Register", component: Register },
+  { path: '/profile', name: "Profile", component: Profile, meta: { requiresAuth: true } },
   { path: "/buku", name: "Buku", component: Buku, meta: { requiresAuth: true } },
   { path: "/denda", name: "Denda", component: Denda, meta: { requiresAuth: true } },
   { path: "/peminjaman", name: "Peminjaman", component: Peminjaman, meta: { requiresAuth: true } },

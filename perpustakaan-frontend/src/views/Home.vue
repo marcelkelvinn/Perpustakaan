@@ -6,6 +6,7 @@
       <button @click="goToPeminjaman">Peminjaman</button>
       <button @click="goToDenda">Denda</button>
       <button @click="goToSirkulasi">Sirkulasi</button>
+      <button @click="goToProfile">Profil</button>
     </div>
     <div class="logout-container">
       <button @click="logout">Logout</button>
@@ -31,6 +32,9 @@ export default {
     goToSirkulasi() {
       this.$router.push('/sirkulasi');
     },
+    goToProfile() {
+      this.$router.push('/profile');
+    },
     async logout() {
       try {
         const token = localStorage.getItem('auth_token');
@@ -41,11 +45,9 @@ export default {
             }
           });
           
-          // Menghapus token dan data user setelah logout berhasil
           localStorage.removeItem('auth_token');
           localStorage.removeItem('user');
           
-          // Redirect ke halaman login setelah logout
           this.$router.push('/login');
         }
       } catch (error) {

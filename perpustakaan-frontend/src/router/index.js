@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import BukuList from "../components/BukuList.vue";
-import PeminjamanList from "../components/PeminjamanList.vue";
-import DendaList from "../components/DendaList.vue";
-import SirkulasiList from "../components/SirkulasiList.vue";
+import BukuDisplay from "../components/BukuDisplay.vue";
 
 const routes = [
   {
@@ -11,19 +9,9 @@ const routes = [
     component: BukuList,
   },
   {
-    path: "/peminjamans",
-    name: "PeminjamanList",
-    component: PeminjamanList,
-  },
-  {
-    path: "/dendas",
-    name: "DendaList",
-    component: DendaList,
-  },
-  {
-    path: "/sirkulasis",
-    name: "SirkulasiList",
-    component: SirkulasiList,
+    path: "/displaybukus",
+    name: "BukuDisplay",
+    component: BukuDisplay,
   },
 ];
 

@@ -1,20 +1,3 @@
-<<<<<<< HEAD
-import { createRouter, createWebHistory } from "vue-router";
-import BukuList from "../components/BukuList.vue";
-import BukuDisplay from "../components/BukuDisplay.vue";
-
-const routes = [
-  {
-    path: "/bukus",
-    name: "BukuList",
-    component: BukuList,
-  },
-  {
-    path: "/displaybukus",
-    name: "BukuDisplay",
-    component: BukuDisplay,
-  },
-=======
 import { createRouter, createWebHistory } from 'vue-router';
 import HelloWorld from '../views/HelloWorld.vue';
 import Home from '../views/Home.vue';
@@ -34,7 +17,7 @@ const routes = [
   { path: "/denda", name: "Denda", component: Denda, meta: { requiresAuth: true } },
   { path: "/peminjaman", name: "Peminjaman", component: Peminjaman, meta: { requiresAuth: true } },
   { path: "/sirkulasi", name: "Sirkulasi", component: Sirkulasi, meta: { requiresAuth: true } },
->>>>>>> upstream/main
+  
 ];
 
 const router = createRouter({

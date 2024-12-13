@@ -11,12 +11,14 @@ Full-stack application
 1. Masuk kedalam directory backend
 
 ```bash
-cd backend
+cd perpustakaan-backend
+```
 
 2. Install dependencies untuk backend
 
 ```bash
 composer install
+```
 
 3. Konfigurasi file .env
 
@@ -27,39 +29,49 @@ DB_PORT=3306
 DB_DATABASE=perpustakaan
 DB_USERNAME=root
 DB_PASSWORD=
+```
 
 4. Jalankan migrasi database dan juga seeder untuk memasukkan data awal/dummy
 
 ```bash
 php artisan migrate --seed
+```
 
 5. Jalankan perintah untuk development server
 
 ```bash
 php artisan serve
+```
 
 ## Frontend
 1. Masuk kedalam directory backend
 
 ```bash
-cd frontend
+cd perpustakaan-frontend
+```
 
 2. Install dependencies untuk frontend
 
 ```bash
 npm install
+```
+
+```bash
+npm install axios
+```
 
 3. Jalankan perintah untuk development server
 
 ```bash
 npm run dev
+```
 
 # Informasi Tambahan :
-Backend Menggunakan Laravel 10 berbasis SOA, sehingga controller terletak pada app/Services
-Frontend Menggunakan Vue.js dengan axios
-
-Backend berjalan ada port 8000 menggunakan api, dan untuk menghubungkan ke Frondend menggunakan CORS
-Frontend berjalan pada port 5173
+- Backend Menggunakan Laravel 11 berbasis SOA, sehingga controller terletak pada app/Services
+- Frontend Menggunakan Vue.js dengan axios
+- - - - - - - - - - - - - - - -
+- Backend berjalan ada port 8000 menggunakan api, dan untuk menghubungkan ke Frondend menggunakan CORS
+- Frontend berjalan pada port 5173
 
 ## Contoh akses :
 
@@ -69,14 +81,16 @@ backend
 
 ```bash
 php artisan serve
+```
 
 frontend
 
 ```bash
 npm run dev
+```
 
-### Backend :
-http://localhost:8000/api/buku
+- Backend :
+  http://localhost:8000/api/buku
 
-### Frontend :
-http://localhost:5173/bukus
+- Frontend :
+  http://localhost:5173/bukus

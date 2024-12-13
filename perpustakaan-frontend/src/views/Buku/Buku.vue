@@ -3,8 +3,8 @@
     <h2 style="text-align: center; margin-bottom: 80px;">Daftar Buku</h2>
     <div class="box-container">
       <div class="d-flex justify-content-end mb-3">
-        <button class="btn btn-primary btn-blue" @click="openForm()">
-          <img src="../assets/icon tambah.png" style="height: 12px; margin-right:3px;">
+        <button class="btn btn-primary btn-blue" style="width: 150px;" @click="openForm()">
+          <img src="./icon tambah.png" style="height: 12px; margin-right:3px;">
           Tambah Buku
           </button>
         <input type="text" v-model="searchQuery" class="form-control mr-2" placeholder="Cari Buku..." @input="filterBuku" style="max-width: 300px;"/>
@@ -36,11 +36,11 @@
             <td>{{ buku.kategori?.nama || 'Tidak ada' }}</td>
             <td>{{ buku.tahun_terbit }}</td>
             <td>
-              <button class="btn btn-warning btn-sm btn-green" @click="openForm(buku)" style="margin-right:2px;">
-                <img src="../assets/icon edit.png" style="height: 20px;">
+              <button class="btn btn-warning btn-sm btn-green" @click="openForm(buku)" style="width: 70px; margin-right: 2px;">
+                <img src="./icon edit.png" style="height: 20px;">
               </button>
-              <button class="btn btn-danger btn-sm btn-red" @click="deleteBuku(buku.id)">
-                <img src="../assets/icon delete.png" style="height: 20px;">
+              <button class="btn btn-danger btn-sm btn-red" @click="deleteBuku(buku.id)" style="width: 70px;">
+                <img src="./icon delete.png" style="height: 20px;">
               </button>
             </td>
           </tr>

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('ulasans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_buku')->constrained('bukus');
-            $table->foreignId('id_user')->constrained('users');
+            $table->foreignId('id_buku')->constrained('bukus')->cascadeOnDelete();
+            $table->foreignId('id_user')->constrained('users')->cascadeOnDelete();
             $table->enum('rating', ['1', '2', '3', '4', '5']);
             $table->timestamps();
         });

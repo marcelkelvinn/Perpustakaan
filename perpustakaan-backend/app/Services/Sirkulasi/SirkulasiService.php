@@ -4,49 +4,51 @@ namespace App\Services\Sirkulasi;
 
 use App\Models\Sirkulasi;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Gate;
 
-class SirkulasiService
+class SirkulasiService implements HasMiddleware
 {
+    public static function middleware()
+    {
+        return [
+            new Middleware('auth:sanctum', except: ['index', 'show'])
+        ];
+    }
+
     public function create(Request $request)
     {
-        $request->validate([
+        $fields = $request->validate([
             'id_buku' => 'required|exists:bukus,id',
             'id_user' => 'required|exists:users,id',
             'status' => 'required|string|in:dipinjam,kembali',
         ]);
 
-        return Sirkulasi::create($request->all());
+        $sirkulasi = $request->user()->peminjaman()->create($fields);
+
+        return $sirkulasi;
     }
 
-    public function getAll()
+    public function update(Request $request, Sirkulasi $sirkulasi)
     {
-        return Sirkulasi::all();
-    }
-
-    public function getById($id)
-    {
-        return Sirkulasi::findOrFail($id);
-    }
-
-    public function update($id, Request $request)
-    {
-        $request->validate([
+        $fields = $request->validate([
             'id_buku' => 'sometimes|exists:bukus,id',
             'id_user' => 'sometimes|exists:users,id',
             'status' => 'sometimes|string|in:dipinjam,kembali',
         ]);
 
-        $sirkulasi = Sirkulasi::findOrFail($id);
-        $sirkulasi->update($request->all());
+        $sirkulasi->update($fields);
 
         return $sirkulasi;
     }
 
-    public function delete($id)
+    public function delete(Sirkulasi $sirkulasi)
     {
-        $sirkulasi = Sirkulasi::findOrFail($id);
+        Gate::authorize('modify', $sirkulasi);
+
         $sirkulasi->delete();
 
-        return response()->json(['message' => 'Sirkulasi berhasil dihapus']);
+        return ['message' => 'Sirkulasi berhasil dihapus'];
     }
 }

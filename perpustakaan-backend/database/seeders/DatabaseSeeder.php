@@ -42,11 +42,13 @@ class DatabaseSeeder extends Seeder
         // Insert data dummy untuk denda
         DB::table('dendas')->insert([
             [
+                'id_user' => 3,
                 'hari' => 2,  // Jumlah hari keterlambatan
                 'harga_denda' => 5000,  // Jumlah denda
                 'status_pembayaran' => 'belum dibayar',  // Status pembayaran
             ],
             [
+                'id_user' => 3,
                 'hari' => 3,
                 'harga_denda' => 10000,
                 'status_pembayaran' => 'belum dibayar',

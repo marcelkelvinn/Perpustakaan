@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('bukus', function (Blueprint $table) {
             $table->id();
             $table->string('judul', 64);
-            $table->foreignId('id_pengarang')->constrained('pengarangs');
-            $table->foreignId('id_penerbit')->constrained('penerbits');
-            $table->foreignId('id_kategori')->constrained('kategoris');
+            $table->foreignId('id_pengarang')->constrained('pengarangs')->cascadeOnDelete();
+            $table->foreignId('id_penerbit')->constrained('penerbits')->cascadeOnDelete();
+            $table->foreignId('id_kategori')->constrained('kategoris')->cascadeOnDelete();
             $table->year('tahun_terbit');
             $table->timestamps();
         });

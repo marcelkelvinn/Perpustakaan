@@ -90,7 +90,7 @@ npm run dev
 ```
 
 - Backend :
-  http://localhost:8000/api/buku
+  http://localhost:8000/api/
 
 - Frontend :
-  http://localhost:5173/bukus
+  http://localhost:5173/

@@ -34,7 +34,7 @@ DB_PASSWORD=
 4. Jalankan migrasi database dan juga seeder untuk memasukkan data awal/dummy
 
 ```bash
-php artisan migrate --seed
+php artisan migrate:fresh --seed
 ```
 
 5. Jalankan perintah untuk development server

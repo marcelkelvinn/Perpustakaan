@@ -1,7 +1,7 @@
 # PENTING!
 # Projek Perpustakaan
 
-Full-stack application
+Aplikasi Berbasis API dengan
 - perpustakaan-backend (Backend)
 - perpustakaan-frontend (Frontend)
 

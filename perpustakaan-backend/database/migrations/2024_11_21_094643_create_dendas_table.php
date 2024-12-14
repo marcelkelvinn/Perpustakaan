@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('dendas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_user')->constrained('users')->cascadeOnDelete();
             $table->integer('hari');
             $table->integer('harga_denda');
             $table->enum('status_pembayaran', ['sudah dibayar', 'belum dibayar']);

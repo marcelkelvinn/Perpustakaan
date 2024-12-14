@@ -20,6 +20,7 @@ class Denda extends Model
      * @var array
      */
     protected $fillable = [
+        'id_user',
         'hari',
         'harga_denda',
         'status_pembayaran',
@@ -31,4 +32,9 @@ class Denda extends Model
      * @var bool
      */
     public $timestamps = true;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user', 'id');
+    }
 }

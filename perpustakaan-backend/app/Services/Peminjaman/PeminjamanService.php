@@ -4,55 +4,53 @@ namespace App\Services\Peminjaman;
 
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Gate;
 
-class PeminjamanService
+class PeminjamanService implements HasMiddleware
 {
+    public static function middleware()
+    {
+        return [
+            new Middleware('auth:sanctum', except: ['index', 'show'])
+        ];
+    }
+
     public function create(Request $request)
     {
-        $request->validate([
+        $fields = $request->validate([
             'id_user' => 'required|exists:users,id',
             'id_buku' => 'required|exists:bukus,id',
             'tgl_pinjam' => 'required|date',
         ]);
 
-        return Peminjaman::create($request->all());
+        $peminjaman = $request->user()->peminjaman()->create($fields);
+
+        return $peminjaman;
     }
 
-    public function getAll()
+    public function update(Request $request, Peminjaman $peminjaman)
     {
-        return Peminjaman::all();
-    }
+        Gate::authorize('modify', $peminjaman);
 
-    public function getTotalPeminjaman()
-    {
-        $totalPeminjaman = Peminjaman::count();
-        return response()->json(['total' => $totalPeminjaman]);
-    }
-
-    public function getById($id)
-    {
-        return Peminjaman::findOrFail($id);
-    }
-
-    public function update($id, Request $request)
-    {
-        $request->validate([
+        $fields = $request->validate([
             'id_user' => 'sometimes|exists:users,id',
             'id_buku' => 'sometimes|exists:bukus,id',
             'tgl_pinjam' => 'sometimes|date',
         ]);
 
-        $peminjaman = Peminjaman::findOrFail($id);
-        $peminjaman->update($request->all());
+        $peminjaman->update($fields);
 
         return $peminjaman;
     }
 
-    public function delete($id)
+    public function delete(Peminjaman $peminjaman)
     {
-        $peminjaman = Peminjaman::findOrFail($id);
+        Gate::authorize('modify', $peminjaman);
+
         $peminjaman->delete();
 
-        return response()->json(['message' => 'Peminjaman berhasil dihapus']);
+        return ['message' => 'Peminjaman berhasil dihapus'];
     }
 }

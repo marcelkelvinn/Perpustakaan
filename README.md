@@ -1,7 +1,7 @@
 # PENTING!
 # Projek Perpustakaan
 
-Full-stack application
+Aplikasi Berbasis API dengan
 - perpustakaan-backend (Backend)
 - perpustakaan-frontend (Frontend)
 
@@ -34,7 +34,7 @@ DB_PASSWORD=
 4. Jalankan migrasi database dan juga seeder untuk memasukkan data awal/dummy
 
 ```bash
-php artisan migrate --seed
+php artisan migrate:fresh --seed
 ```
 
 5. Jalankan perintah untuk development server
@@ -90,7 +90,7 @@ npm run dev
 ```
 
 - Backend :
-  http://localhost:8000/api/buku
+  http://localhost:8000/api/
 
 - Frontend :
-  http://localhost:5173/bukus
+  http://localhost:5173/

@@ -3,10 +3,10 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\DendaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Services\Buku\BukuService;
-use App\Services\Denda\DendaService;
 use App\Services\Peminjaman\PeminjamanService;
 use App\Services\Sirkulasi\SirkulasiService;
 
@@ -24,11 +24,7 @@ Route::prefix('buku')->group(function () {
     Route::get('/buku', [BukuController::class, 'index']);
 });
 
-Route::prefix('denda')->group(function () {
-    Route::post('/', [DendaService::class, 'create'])->middleware('auth:sanctum');
-    Route::put('{id}', [DendaService::class, 'update'])->middleware('auth:sanctum');
-    Route::delete('{id}', [DendaService::class, 'delete'])->middleware('auth:sanctum');
-});
+Route::apiResource('dendas', DendaController::class);
 
 Route::prefix('peminjaman')->group(function () {
     Route::post('/', [PeminjamanService::class, 'create'])->middleware('auth:sanctum');

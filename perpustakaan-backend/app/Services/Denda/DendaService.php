@@ -30,6 +30,12 @@ class DendaService implements HasMiddleware
         return $denda;
     }
 
+    public function getById($id)
+    {
+        return Denda::findOrFail($id);
+    }
+
+
     public function update(Request $request, Denda $denda)
     {
         Gate::authorize('modify', $denda);

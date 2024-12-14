@@ -33,7 +33,7 @@
             <td>{{ buku.judul }}</td>
             <td>{{ buku.pengarang?.nama || 'Tidak ada' }}</td>
             <td>{{ buku.penerbit?.nama || 'Tidak ada' }}</td>
-            <td>{{ buku.kategori?.nama || 'Tidak ada' }}</td>
+            <td>{{ buku.kategori?.kategori || 'Tidak ada' }}</td>
             <td>{{ buku.tahun_terbit }}</td>
             <td>
               <button class="btn btn-warning btn-sm btn-green" @click="openForm(buku)" style="width: 70px; margin-right: 2px;">

@@ -14,6 +14,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::get('/user', [UserController::class, 'getUserProfile'])->middleware('auth:sanctum');
+Route::middleware('auth:sanctum')->put('/uprofile/{user}', [UserController::class, 'updateProfile']);
 
 Route::prefix('buku')->group(function () {
     Route::post('/', [BukuService::class, 'create'])->middleware('auth:sanctum');

@@ -61,8 +61,17 @@ export default {
 </script>
 
 <style scoped>
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #ffffff; /* Warna latar belakang opsional */
+    margin: 0;
+}
+
 .login-box {
-    background: #ffffff;
+    background: #f5f5f5;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

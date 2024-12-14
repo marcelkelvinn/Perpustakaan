@@ -19,6 +19,7 @@ const routes = [
   { path: "/denda", name: "Denda", component: Denda, meta: { requiresAuth: true } },
   { path: "/peminjaman", name: "Peminjaman", component: Peminjaman, meta: { requiresAuth: true } },
   { path: "/sirkulasi", name: "Sirkulasi", component: Sirkulasi, meta: { requiresAuth: true } },
+  
 ];
 
 const router = createRouter({

@@ -62,36 +62,47 @@ export default {
   data() {
     return {
       bukus: [],
-      loading: true,
+      filteredBukus: [],
+      searchQuery: "",
+      isLoading: false,
+      errorMessage: "",
       showForm: false,
       selectedBuku: null,
-      searchQuery: "", // Added to track search query
-      filteredBukus: [], // Added for filtered books
     };
   },
   async created() {
     await this.fetchBukus();
   },
   methods: {
+    // Helper untuk mendapatkan instance axios dengan token
+    getAxiosInstance() {
+      const token = localStorage.getItem("auth_token");
+      return axios.create({
+        baseURL: "http://localhost:8000/api",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+    },
     async fetchBukus() {
-      this.loading = true;
+      this.isLoading = true;
+      this.errorMessage = "";
+
       try {
-        const response = await axios.get("http://localhost:8000/api/buku");
+        const axiosInstance = this.getAxiosInstance();
+        const response = await axiosInstance.get("/buku");
         this.bukus = response.data;
-        this.filteredBukus = this.bukus; // Initialize with all bukus
+        this.filteredBukus = this.bukus;
       } catch (error) {
-        console.error("Error fetching data:", error);
+        this.errorMessage = "Failed to fetch books. Please try again later.";
       } finally {
-        this.loading = false;
+        this.isLoading = false;
       }
     },
     filterBuku() {
-      // Filter books based on the search query
       this.filteredBukus = this.bukus.filter(buku => 
         buku.judul.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        (buku.pengarang?.nama || '').toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        (buku.penerbit?.nama || '').toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        (buku.kategori?.nama || '').toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        (buku.pengarang?.nama || "").toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        (buku.penerbit?.nama || "").toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        (buku.kategori?.nama || "").toLowerCase().includes(this.searchQuery.toLowerCase()) ||
         buku.tahun_terbit.toString().includes(this.searchQuery)
       );
     },
@@ -105,12 +116,18 @@ export default {
     },
     async deleteBuku(id) {
       if (confirm("Apakah Anda yakin ingin menghapus buku ini?")) {
+        this.isLoading = true;
+        this.errorMessage = "";
+
         try {
-          await axios.delete(`http://localhost:8000/api/buku/${id}`);
+          const axiosInstance = this.getAxiosInstance();
+          await axiosInstance.delete(`/buku/${id}`);
           alert("Buku berhasil dihapus");
           this.fetchBukus();
         } catch (error) {
-          console.error("Error deleting buku:", error);
+          this.errorMessage = "Failed to delete book. Please try again.";
+        } finally {
+          this.isLoading = false;
         }
       }
     },

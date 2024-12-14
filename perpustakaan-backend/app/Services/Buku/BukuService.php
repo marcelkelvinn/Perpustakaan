@@ -21,9 +21,9 @@ class BukuService
     }
 
     public function getAll()
-    {
-        return Buku::all();
-    }
+{
+    return Buku::with(['pengarang', 'penerbit', 'kategori'])->get();
+}
 
     public function getTotalBuku()
 {

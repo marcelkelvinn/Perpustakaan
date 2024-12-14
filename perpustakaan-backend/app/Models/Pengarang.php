@@ -29,6 +29,6 @@ class Pengarang extends Model
      */
     public function buku()
     {
-        return $this->hasMany(Buku::class, 'id_pengarang', 'id_pengarang');
+        return $this->hasMany(Buku::class);
     }
 }

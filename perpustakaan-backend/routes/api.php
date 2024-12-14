@@ -39,6 +39,8 @@ Route::prefix('peminjaman')->group(function () {
 
 Route::prefix('sirkulasi')->group(function () {
     Route::post('/', [SirkulasiService::class, 'create'])->middleware('auth:sanctum');
+    Route::get('/', [SirkulasiService::class, 'getAll']);
+    Route::get('{id}', [SirkulasiService::class, 'getById']);
     Route::put('{id}', [SirkulasiService::class, 'update'])->middleware('auth:sanctum');
     Route::delete('{id}', [SirkulasiService::class, 'delete'])->middleware('auth:sanctum');
 });

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BukuController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Services\Buku\BukuService;
@@ -20,6 +21,7 @@ Route::prefix('buku')->group(function () {
     Route::get('{id}', [BukuService::class, 'getById']);
     Route::put('{id}', [BukuService::class, 'update'])->middleware('auth:sanctum');
     Route::delete('{id}', [BukuService::class, 'delete'])->middleware('auth:sanctum');
+    Route::get('/buku', [BukuController::class, 'index']);
 });
 
 Route::prefix('denda')->group(function () {

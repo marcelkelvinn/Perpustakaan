@@ -30,6 +30,6 @@ class Penerbit extends Model
      */
     public function buku()
     {
-        return $this->hasMany(Buku::class, 'id_penerbit', 'id_penerbit');
+        return $this->hasMany(Buku::class);
     }
 }

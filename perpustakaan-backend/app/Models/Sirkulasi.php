@@ -28,19 +28,30 @@ class Sirkulasi extends Model
         'status',
     ];
 
-    /**
-     * Relasi dengan buku.
-     */
     public function buku()
     {
-        return $this->belongsTo(Buku::class, 'id_buku', 'id_buku');
+        return $this->belongsTo(Buku::class, 'id_buku', 'id');
     }
 
-    /**
-     * Relasi dengan user.
-     */
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user', 'id');
+    }
+
+
+    /**
+     * Scope untuk filter berdasarkan status.
+     */
+    public function scopeFilterByStatus($query, $status)
+    {
+        return $query->where('status', $status);
+    }
+
+    /**
+     * Scope untuk mencari berdasarkan tanggal peminjaman.
+     */
+    public function scopeFilterByTanggalPinjam($query, $startDate, $endDate)
+    {
+        return $query->whereBetween('tgl_pinjam', [$startDate, $endDate]);
     }
 }

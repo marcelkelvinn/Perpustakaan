@@ -47,6 +47,8 @@ export default {
         id_kategori: "",
         tahun_terbit: "",
       },
+      isLoading: false,
+      errorMessage: "",
     };
   },
   created() {
@@ -55,22 +57,37 @@ export default {
     }
   },
   methods: {
+    // Helper untuk mendapatkan instance axios dengan token
+    getAxiosInstance() {
+      const token = localStorage.getItem("auth_token");
+      return axios.create({
+        baseURL: "http://localhost:8000/api",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+    },
     async submitForm() {
+      this.isLoading = true;
+      this.errorMessage = "";
+
       try {
+        const axiosInstance = this.getAxiosInstance();
         if (this.selectedBuku) {
-          await axios.put(`http://localhost:8000/api/buku/${this.buku.id}`, this.buku);
+          await axiosInstance.put(`/buku/${this.buku.id}`, this.buku);
           alert("Buku berhasil diperbarui");
         } else {
-          await axios.post("http://localhost:8000/api/buku", this.buku);
+          await axiosInstance.post("/buku", this.buku);
           alert("Buku berhasil ditambahkan");
         }
         this.$emit("close");
       } catch (error) {
-        console.error("Error saving buku:", error);
+        this.errorMessage = "Failed to save book. Please check your input.";
+      } finally {
+        this.isLoading = false;
       }
     },
   },
 };
+
 </script>
 
 <style scoped>

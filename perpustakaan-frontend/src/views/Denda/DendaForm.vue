@@ -1,15 +1,20 @@
+DendaForm.vue
 <template>
   <div class="modal-overlay">
     <div class="modal-content">
       <h3>{{ selectedDenda ? "Edit Denda" : "Tambah Denda" }}</h3>
       <form @submit.prevent="submitForm">
         <div class="form-group">
+          <label>ID User</label>
+          <input type="number" v-model="denda.id_user" class="form-control" required min="0" />
+        </div>
+        <div class="form-group">
           <label>Hari</label>
-          <input type="number" v-model="denda.hari" class="form-control" required />
+          <input type="number" v-model="denda.hari" class="form-control" required min="0" />
         </div>
         <div class="form-group">
           <label>Harga Denda</label>
-          <input type="number" v-model="denda.harga_denda" class="form-control" required />
+          <input type="number" v-model="denda.harga_denda" class="form-control" required min="0" />
         </div>
         <div class="form-group">
           <label>Status Pembayaran</label>
@@ -18,8 +23,9 @@
             <option value="belum dibayar">Belum Dibayar</option>
           </select>
         </div>
+        <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
         <div class="form-group mt-4">
-          <button type="submit" class="btn btn-primary btn-submit">Simpan</button>
+          <button type="submit" class="btn btn-primary btn-submit" :disabled="isLoading">Simpan</button>
           <button type="button" class="btn btn-secondary btn-cancel" style="float: right;" @click="$emit('close')">Batal</button>
         </div>
       </form>
@@ -36,6 +42,7 @@ export default {
   data() {
     return {
       denda: {
+        id_user: "",
         hari: "",
         harga_denda: "",
         status_pembayaran: "belum dibayar", // Default value
@@ -50,29 +57,25 @@ export default {
     }
   },
   methods: {
-    getAxiosInstance() {
-      const token = localStorage.getItem("auth_token");
-      return axios.create({
-        baseURL: "http://localhost:8000/api",
-        headers: { Authorization: `Bearer ${token}` },
-      });
-    },
     async submitForm() {
       this.isLoading = true;
       this.errorMessage = "";
 
       try {
-        const axiosInstance = this.getAxiosInstance();
         if (this.selectedDenda) {
-          await axiosInstance.put(`/dendas/${this.denda.id}`, this.denda);
+          await axios.put("/dendas/${this.denda.id}", this.denda);
           alert("Denda berhasil diperbarui");
         } else {
-          await axiosInstance.post("/dendas", this.denda);
+          await axios.post("http://localhost:8000/api/dendas", this.denda);
           alert("Denda berhasil ditambahkan");
         }
         this.$emit("close");
       } catch (error) {
-        this.errorMessage = "Gagal menyimpan denda. Silakan periksa input Anda.";
+        if (error.response && error.response.data) {
+          this.errorMessage = error.response.data.message || "Gagal menyimpan denda. Silakan periksa input Anda.";
+        } else {
+          this.errorMessage = "Gagal menyimpan denda. Silakan periksa input Anda.";
+        }
       } finally {
         this.isLoading = false;
       }
@@ -144,5 +147,28 @@ button {
   font-size: 16px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0
+  transition: background-color 0.3s ease;
 }
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.btn-primary:disabled {
+  background-color: #007bff;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+</style>

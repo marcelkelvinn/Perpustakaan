@@ -4,31 +4,35 @@ namespace App\Services\Denda;
 
 use App\Models\Denda;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Gate;
 
-class DendaService implements HasMiddleware
+class DendaService
 {
-    public static function middleware()
-    {
-        return [
-            new Middleware('auth:sanctum', except: ['index', 'show'])
-        ];
-    }
+    // public static function middleware()
+    // {
+    //     return [
+    //         new Middleware('auth:sanctum', except: ['index', 'show'])
+    //     ];
+    // }
 
     public function create(Request $request)
-    {
-        $fields = $request->validate([
-            'hari' => 'required|integer',
-            'harga_denda' => 'required|integer',
-            'status_pembayaran' => 'required|in:sudah dibayar,belum dibayar',
-        ]);
+{
+    // $user = $request->user();
+    // if (!$user) {
+    //     return response()->json(['error' => 'User  not authenticated'], 401);
+    // }
 
-        $denda = $request->user()->denda()->create($fields);
+    $fields = $request->validate([
+        'id_user' => 'required|exists:users,id',
+        'hari' => 'required|integer',
+        'harga_denda' => 'required|integer',
+        'status_pembayaran' => 'required|in:sudah dibayar,belum dibayar',
+    ]);
 
-        return $denda;
-    }
+    // $denda = $user->denda()->create($fields);
+
+    return Denda::create($fields);
+}
 
     public function getById($id)
     {
@@ -38,7 +42,7 @@ class DendaService implements HasMiddleware
 
     public function update(Request $request, Denda $denda)
     {
-        Gate::authorize('modify', $denda);
+        // Gate::authorize('modify', $denda);
 
         $fields = $request->validate([
             'hari' => 'sometimes|integer',
@@ -47,13 +51,12 @@ class DendaService implements HasMiddleware
         ]);
 
         $denda->update($fields);
-
         return $denda;
     }
 
     public function delete(Denda $denda)
     {
-        Gate::authorize('modify', $denda);
+        // Gate::authorize('modify', $denda);
 
         $denda->delete();
 

@@ -19,6 +19,7 @@
         <thead>
           <tr>
             <th>No</th>
+            <th>ID User</th>
             <th>Hari</th>
             <th>Harga Denda</th>
             <th>Status Pembayaran</th>
@@ -28,6 +29,7 @@
         <tbody>
           <tr v-for="(denda, index) in filteredDendas" :key="denda.id">
             <td>{{ index + 1 }}</td>
+            <td>{{ denda.id_user }}</td>
             <td>{{ denda.hari }}</td>
             <td>{{ denda.harga_denda }}</td>
             <td>{{ denda.status_pembayaran }}</td>
@@ -70,20 +72,12 @@ export default {
     await this.fetchDendas();
   },
   methods: {
-    getAxiosInstance() {
-      const token = localStorage.getItem("auth_token");
-      return axios.create({
-        baseURL: "http://localhost:8000/api",
-        headers: { Authorization: `Bearer ${token}` },
-      });
-    },
     async fetchDendas() {
       this.isLoading = true;
       this.errorMessage = "";
 
       try {
-        const axiosInstance = this.getAxiosInstance();
-        const response = await axiosInstance.get("/dendas");
+        const response = await axios.get("/dendas");
         this.dendas = response.data;
         this.filteredDendas = this.dendas;
       } catch (error) {
@@ -113,8 +107,7 @@ export default {
         this.errorMessage = "";
 
         try {
-          const axiosInstance = this.getAxiosInstance();
-          await axiosInstance.delete(`/dendas/${id}`);
+          await axios.delete("/dendas/${id}");
           alert("Denda berhasil dihapus");
           this.fetchDendas(); // Refresh the list after deletion
         } catch (error) {
@@ -186,6 +179,15 @@ export default {
 
 .btn-green:hover {
   background-color: #399045;
+}
+
+input.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  float:right;
 }
 
 /* Box container styling */
